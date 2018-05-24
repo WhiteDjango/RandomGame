@@ -1,5 +1,6 @@
 package pl.swiebodzin.pzstiz.randomgame;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             counter--;
             button.setText(String.valueOf(counter));
             if (counter == 0) {
+                checkCounter();
                 shiftPlayer(currentPlayer);
             }
             int number = Integer.parseInt(currentNumber.getText().toString());
@@ -132,7 +134,14 @@ public class MainActivity extends AppCompatActivity {
     public void checkCounter(){
         if(counter == 0 ){
             globalCounter--;
+            if (globalCounter == 0){
+                getGameOverActivity();
+            }
         }
 
+    }
+    public void getGameOverActivity(){
+        Intent intent = new Intent(this,activity_game_over.class);
+        startActivity(intent);
     }
 }
